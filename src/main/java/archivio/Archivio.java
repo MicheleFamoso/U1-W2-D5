@@ -19,13 +19,14 @@ public class Archivio {
     }
 
     //CERCA ISBN
-    public ElementiCatalogo cercaPerISBN(Integer isbn) throws ElementoNonTrovatoException {
+    public ElementiCatalogo cercaPerISBN(Integer isbn) throws ElementoNonTrovatoException  {
         for (ElementiCatalogo e : elementi) {
             if (e.getCodiceISBN().equals(isbn)) {
                 return e;
             }
         }
-        throw new ElementoNonTrovatoException(isbn);
+        throw new ElementoNonTrovatoException(isbn) ;
+
     }
         //RIMUOVI PER ISBN
     public void rimuovi(Integer isbn) {

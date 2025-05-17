@@ -1,5 +1,6 @@
 package archivio;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class EsecuzioneArchivio {
@@ -29,6 +30,7 @@ public class EsecuzioneArchivio {
                case 0 : esecuzione= false;
                break;
                case 1 :
+                   
                    System.out.println("Digita :");
                    System.out.println("1 - Libro");
                    System.out.println("2- Rivista");
@@ -71,25 +73,41 @@ public class EsecuzioneArchivio {
                    break;
                case 2 :
                    System.out.print("Inserisci ISBN da cercare: ");
-                   Integer isbn = scanner.nextInt();
-
                    try {
+                       Integer isbn = scanner.nextInt();
                        ElementiCatalogo trovato = a1.cercaPerISBN(isbn);
                        System.out.println("Elemento trovato: " + trovato);
-                   } catch (ElementoNonTrovatoException e) {
+                   }catch (InputMismatchException i){
+                       System.out.println("Inserire solo numeri interi" );
+                       scanner.nextLine();
+                   }catch (ElementoNonTrovatoException e) {
                        System.out.println("Errore: " + e.getMessage());
                    }
                    break;
+
+
                case 3 :
-                   System.out.println("Inserisci ISBN per eliminare: ");
-                   Integer z = scanner.nextInt();
-                   a1.rimuovi(z);
-                   System.out.println( z + "Rimosso con successo");
+                   try {
+                       System.out.println("Inserisci ISBN per eliminare: ");
+                       Integer z = scanner.nextInt();
+                       a1.rimuovi(z);
+                       System.out.println( z + "Rimosso con successo");
+                   }catch (InputMismatchException d){
+                       System.out.println("Inserire solo numeri interi" );
+                       scanner.nextLine();
+                   }
+
                    break;
                case 4 :
-                   System.out.println("Inserisci l'anno: ");
-                   int y = scanner.nextInt();
-                   System.out.println(a1.cercaPerAnno(y));
+                   try {
+                       System.out.println("Inserisci l'anno: ");
+                       int y = scanner.nextInt();
+                       System.out.println(a1.cercaPerAnno(y));
+                   }catch (InputMismatchException z){
+                       System.out.println("Inserire solo numeri interi" );
+                       scanner.nextLine();
+                   }
+
                    break;
                case 5:
                    System.out.println("Inserisci autore: ");
@@ -97,9 +115,15 @@ public class EsecuzioneArchivio {
                    System.out.println(a1.cercaPerAutore(a));
                    break;
                case 6:
-                   System.out.println("Aggiorna con ISBN: ");
-                   int f = scanner.nextInt();
-                   a1.aggiornaElemento(f);
+                   try {
+                       System.out.println("Aggiorna con ISBN: ");
+                       int f = scanner.nextInt();
+                       a1.aggiornaElemento(f);
+                   }catch (InputMismatchException e){
+                       System.out.println("Inserire solo numeri interi" );
+                       scanner.nextLine();
+                   }
+
                    break;
                case 7:
                    a1.stampaStatisticheCatalogo();
